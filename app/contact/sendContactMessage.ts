@@ -32,7 +32,7 @@ export async function sendContactMessage(_: unknown, formData: FormData) {
 
         const result = await resend.emails.send({
             from: 'Portfolio Contact <onboarding@resend.dev>',
-            to: ['arunnnet@gmail.com'], // must match your Resend account email for resend.dev
+            to: ['arun-upadhyay1107@gmail.com'], // must match your Resend account email for resend.dev
             subject: `Portfolio message from ${name}`,
             replyTo: email,
             text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
