@@ -30,12 +30,18 @@ export async function sendContactMessage(_: unknown, formData: FormData) {
 
         const resend = new Resend(process.env.RESEND_API_KEY)
 
-        await  resend.emails.send({
-            from: 'onboarding@resend.dev',
-            to: 'arun.upadhyay1107@gmail.com',
+        const result = await resend.emails.send({
+            from: 'Portfolio Contact <onboarding@resend.dev>',
+            to: ['arun.upadhyay1107@gmail.com'], // must match your Resend account email for resend.dev
             subject: `Portfolio message from ${name}`,
-            html: `<p>Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}</p>`
-        });
+            replyTo: email,
+            text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+        })
+
+        if (result?.error) {
+            console.error('Resend error:', result.error)
+            return { ok: false, message: result.error.message || 'Email provider error.' }
+        }
 
         return { ok: true, message: 'Message sent successfully.' }
     } catch (err) {
