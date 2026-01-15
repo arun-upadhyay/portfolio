@@ -30,13 +30,12 @@ export async function sendContactMessage(_: unknown, formData: FormData) {
 
         const resend = new Resend(process.env.RESEND_API_KEY)
 
-        await resend.emails.send({
-            from: 'Portfolio Contact <onboarding@resend.dev>',
-            to: ['arun.upadhyay1107@gmail.com'],
+        await  resend.emails.send({
+            from: 'onboarding@resend.dev',
+            to: 'arun.upadhyay1107@gmail.com',
             subject: `Portfolio message from ${name}`,
-            replyTo: email,
-            text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-        })
+            html: `<p>Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}</p>`
+        });
 
         return { ok: true, message: 'Message sent successfully.' }
     } catch (err) {
