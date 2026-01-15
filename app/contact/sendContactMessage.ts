@@ -32,7 +32,7 @@ export async function sendContactMessage(_: unknown, formData: FormData) {
 
         await resend.emails.send({
             from: 'Portfolio Contact <onboarding@resend.dev>',
-            to: ['arun-upadhyay@outlook.com'],
+            to: ['arun.upadhyay1107@gmail.com'],
             subject: `Portfolio message from ${name}`,
             replyTo: email,
             text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
