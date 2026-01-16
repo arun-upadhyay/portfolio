@@ -35,7 +35,6 @@ export const site = {
   ],
   statusLine: 'Lawful Permanent Resident (USA)',
   contact: {
-    phone: '603-660-7055',
     email: 'arun-upadhyay@outlook.com',
     linkedin: 'https://www.linkedin.com/in/arun-upadhyay',
     github: 'https://github.com/arun-upadhyay'

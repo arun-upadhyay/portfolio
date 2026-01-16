@@ -1,21 +1,42 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
-import { useFormState } from 'react-dom'
-
-import { sendContactMessage } from './sendContactMessage'
+import {useEffect, useRef} from 'react'
+import {useFormState, useFormStatus} from 'react-dom'
+import {HiPaperAirplane} from 'react-icons/hi'
+import {HiArrowLeft} from 'react-icons/hi'
+import {sendContactMessage} from './sendContactMessage'
 
 type FormState = { ok: boolean; message: string } | null
 
-export default function ContactPage() {
+function SubmitButton() {
+    const {pending} = useFormStatus()
 
+    return (
+        <button
+            type="submit"
+            disabled={pending}
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+            <HiPaperAirplane className="h-5 w-5"/>
+            {pending ? 'Sending...' : 'Send message'}
+        </button>
+    )
+}
+
+export default function ContactPage() {
     const [state, formAction] = useFormState<FormState, FormData>(sendContactMessage, null)
     const formRef = useRef<HTMLFormElement>(null)
 
+    // Keep startedAt stable across re-renders (important for time check)
+    const startedAtRef = useRef<string>(Date.now().toString())
+
     // Clear form on success
     useEffect(() => {
-        if (state?.ok) formRef.current?.reset()
+        if (state?.ok) {
+            formRef.current?.reset()
+            startedAtRef.current = Date.now().toString() // reset timer for next submission
+        }
     }, [state])
 
     return (
@@ -23,9 +44,11 @@ export default function ContactPage() {
             <div className="container mx-auto px-6 py-16">
                 <div className="mb-10 flex items-center justify-between">
                     <h1 className="text-3xl font-semibold">Contact</h1>
-                    <Link href="/" className="text-white/70 hover:text-white">
-                        Back to Home
+                    <Link href="/" className="inline-flex items-center gap-2 text-white/70 hover:text-white">
+                        <HiArrowLeft className="h-4 w-4 text-white/60"/>
+                        <span>Back to Home</span>
                     </Link>
+
                 </div>
 
                 <div className="max-w-2xl rounded-2xl border border-white/15 bg-white/5 p-6">
@@ -39,6 +62,8 @@ export default function ContactPage() {
                                     ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-200'
                                     : 'border-red-500/30 bg-red-500/10 text-red-200',
                             ].join(' ')}
+                            role="status"
+                            aria-live="polite"
                         >
                             {state.message}
                         </div>
@@ -46,43 +71,48 @@ export default function ContactPage() {
 
                     <form ref={formRef} action={formAction} className="mt-6 space-y-4">
                         {/* honeypot */}
-                        <input
-                            type="text"
-                            name="company"
-                            tabIndex={-1}
-                            autoComplete="off"
-                            className="hidden"
-                        />
+                        <input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden"/>
 
                         {/* time check */}
-                        <input type="hidden" name="startedAt" value={Date.now().toString()} />
+                        <input type="hidden" name="startedAt" value={startedAtRef.current}/>
 
                         <div>
-                            <label className="text-sm text-white/70">Your name</label>
+                            <label htmlFor="name" className="text-sm text-white/70">
+                                Your name
+                            </label>
                             <input
+                                id="name"
                                 name="name"
                                 required
                                 maxLength={80}
                                 className="mt-2 w-full rounded-lg border border-white/15 bg-black px-4 py-3 text-white outline-none focus:border-white/30"
                                 placeholder="John Doe"
+                                autoComplete="name"
                             />
                         </div>
 
                         <div>
-                            <label className="text-sm text-white/70">Your email</label>
+                            <label htmlFor="email" className="text-sm text-white/70">
+                                Your email
+                            </label>
                             <input
+                                id="email"
                                 name="email"
                                 type="email"
                                 required
                                 maxLength={120}
                                 className="mt-2 w-full rounded-lg border border-white/15 bg-black px-4 py-3 text-white outline-none focus:border-white/30"
                                 placeholder="john@email.com"
+                                autoComplete="email"
                             />
                         </div>
 
                         <div>
-                            <label className="text-sm text-white/70">Message</label>
+                            <label htmlFor="message" className="text-sm text-white/70">
+                                Message
+                            </label>
                             <textarea
+                                id="message"
                                 name="message"
                                 required
                                 rows={6}
@@ -92,12 +122,7 @@ export default function ContactPage() {
                             />
                         </div>
 
-                        <button
-                            type="submit"
-                            className="inline-flex items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black hover:bg-white/90"
-                        >
-                            Send message
-                        </button>
+                        <SubmitButton/>
 
                         <p className="pt-2 text-xs text-white/50">Spam protection is enabled.</p>
                     </form>

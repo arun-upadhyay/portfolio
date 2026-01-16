@@ -5,7 +5,8 @@ import { Navbar } from '@/components/Navbar'
 import { Section } from '@/components/Section'
 import { site } from '@/lib/siteData'
 import Image from 'next/image'
-
+import { FaLinkedin, FaGithub } from 'react-icons/fa'
+import {HiChatAlt2, HiMail} from 'react-icons/hi'
 
 function PillList({ items }: { items: string[] }) {
   return (
@@ -50,27 +51,33 @@ export default function Page() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                     href="#contact"
-                    className="inline-flex items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black hover:bg-white/90"
+                    className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black hover:bg-white/90"
                 >
+                  <HiMail className="h-5 w-5" />
                   Contact
                 </a>
+
                 <a
                     href={site.contact.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
                 >
+                  <FaLinkedin className="h-5 w-5" />
                   LinkedIn
                 </a>
+
                 <a
                     href={site.contact.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
                 >
+                  <FaGithub className="h-5 w-5" />
                   GitHub
                 </a>
               </div>
+
             </div>
 
             {/* Right: Photo */}
@@ -228,25 +235,57 @@ export default function Page() {
         <Section id="contact" title="Contact" subtitle="Reach out for full time roles or contract work.">
           <Card>
             <div className="grid gap-6 md:grid-cols-3">
+
+              {/* Email */}
               <div>
-                <p className="text-sm text-white/60">Email</p>
-                <a className="mt-1 block font-semibold hover:underline" href={`mailto:${site.contact.email}`}>
+                <div className="flex items-center gap-2 text-sm text-white/60">
+                  <HiMail className="h-4 w-4" />
+                  <span>Email</span>
+                </div>
+                <a
+                    className="mt-1 block font-semibold hover:underline"
+                    href={`mailto:${site.contact.email}`}
+                >
                   {site.contact.email}
                 </a>
               </div>
+
+              {/* Message */}
               <div>
-                <p className="text-sm text-white/60">Message</p>
-                <a className="mt-1 block font-semibold hover:underline" href="/contact">
-                  Send a message
+                <div className="flex items-center gap-2 text-sm text-white/60">
+                  <HiChatAlt2 className="h-4 w-4" />
+                  <span>Message</span>
+                </div>
+                <a
+                    className="mt-1 block font-semibold hover:underline"
+                    href="/contact"
+                >
+                  Contact Form
                 </a>
               </div>
+
+              {/* Profiles */}
               <div>
-                <p className="text-sm text-white/60">Profiles</p>
-                <div className="mt-1 flex flex-col gap-1">
-                  <a className="font-semibold hover:underline" href={site.contact.linkedin} target="_blank" rel="noreferrer">
+                <div className="flex items-center gap-2 text-sm text-white/60">
+                  <span>Profiles</span>
+                </div>
+                <div className="mt-2 flex flex-col gap-2">
+                  <a
+                      className="inline-flex items-center gap-2 font-semibold hover:underline"
+                      href={site.contact.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                  >
+                    <FaLinkedin className="h-4 w-4 text-white/70" />
                     LinkedIn
                   </a>
-                  <a className="font-semibold hover:underline" href={site.contact.github} target="_blank" rel="noreferrer">
+                  <a
+                      className="inline-flex items-center gap-2 font-semibold hover:underline"
+                      href={site.contact.github}
+                      target="_blank"
+                      rel="noreferrer"
+                  >
+                    <FaGithub className="h-4 w-4 text-white/70" />
                     GitHub
                   </a>
                 </div>
@@ -255,6 +294,7 @@ export default function Page() {
             </div>
           </Card>
         </Section>
+
       </div>
 
       <Footer />
