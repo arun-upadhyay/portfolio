@@ -33,6 +33,10 @@ export const site = {
     'Experienced across the full software development lifecycle using Agile and Scrum, translating requirements into scalable features and clean, maintainable code.',
     'Strong collaboration skills with cross functional teams across product, UX, QA, and DevOps.'
   ],
+  personal: {
+    family:
+        'Outside of work, I live with my wife and our two children. Family keeps me grounded and reinforces patience, responsibility, and long term thinking in both life and work.'
+  },
   statusLine: 'Lawful Permanent Resident (USA)',
   contact: {
     email: 'arun-upadhyay@outlook.com',

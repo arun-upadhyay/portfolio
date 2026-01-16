@@ -123,6 +123,15 @@ export default function Page() {
           </div>
         </Section>
 
+        {site.personal?.family ? (
+            <Card>
+              <h3 className="text-base font-semibold">Beyond work</h3>
+              <p className="mt-3 text-white/70 leading-relaxed">
+                {site.personal.family}
+              </p>
+            </Card>
+        ) : null}
+
         <Section id="skills" title="Skills" subtitle="Tools and technologies I use regularly.">
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
