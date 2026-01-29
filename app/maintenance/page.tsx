@@ -1,5 +1,5 @@
 // pages/maintenance.tsx
-export default function Maintenance() {
+export default function Page() {
     return (
         <div style={{ textAlign: "center", marginTop: "20vh" }}>
             <h1>🚧 We’ll be back soon</h1>
