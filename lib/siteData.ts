@@ -22,6 +22,18 @@ export type Project = {
   tags: string[]
 }
 
+export type RecruiterStat = {
+  value: string
+  label: string
+  detail: string
+}
+
+export type RecruiterHighlight = {
+  title: string
+  detail: string
+  tags: string[]
+}
+
 export const site = {
   name: 'Arun Kumar Upadhyay',
   role: 'Senior Software Engineer',
@@ -43,6 +55,59 @@ export const site = {
     linkedin: 'https://www.linkedin.com/in/arun-upadhyay',
     github: 'https://github.com/arun-upadhyay'
   },
+  recruiterSnapshot: [
+    {
+      value: '12+ Years',
+      label: 'Enterprise Delivery',
+      detail: 'Delivered front end and backend systems across healthcare, telecom, and government platforms.'
+    },
+    {
+      value: '3 Domains',
+      label: 'Domain Breadth',
+      detail: 'U.S. healthcare EDI claims, telecom monitoring platforms, and public sector business systems.'
+    },
+    {
+      value: 'LPR (USA)',
+      label: 'Work Authorization',
+      detail: 'Lawful Permanent Resident with no visa sponsorship requirement.'
+    },
+    {
+      value: 'MSCS',
+      label: 'Technical Foundation',
+      detail: 'Master of Science in Computer Science with strong architecture, design patterns, and SDLC fundamentals.'
+    }
+  ] as RecruiterStat[],
+  impactHighlights: [
+    {
+      title: 'Healthcare Integrations and Compliance',
+      detail:
+        'Built EDI workflows (X12 834, 835, 837), secure partner file exchange, and event-driven services using AWS and Node.js in a HIPAA-sensitive environment.',
+      tags: ['React', 'TypeScript', 'AWS', 'EDI', 'HIPAA']
+    },
+    {
+      title: 'Large Legacy to Modern SPA Migration',
+      detail:
+        'Converted Adobe Flex systems into React single-page applications while preserving customer workflows and improving maintainability.',
+      tags: ['React SPA', 'Modernization', 'UI Engineering']
+    },
+    {
+      title: 'Real-Time Monitoring Platform Engineering',
+      detail:
+        'Designed APIs, telemetry pipelines, and device integrations across HTTP, SNMP, Modbus, SSH, and Telnet for high-availability monitoring use cases.',
+      tags: ['REST API', 'Telemetry', 'Protocol Integration']
+    },
+    {
+      title: 'Escalation Ownership and Reliability',
+      detail:
+        'Handled customer escalation tickets, root-cause analysis, and production hotfixes while partnering with QA, DevOps, and product teams.',
+      tags: ['Incident Response', 'Datadog', 'Splunk', 'SLA Support']
+    }
+  ] as RecruiterHighlight[],
+  recruiterFocus: [
+    'Hands-on IC who can design architecture and still ship production code quickly.',
+    'Strong communication: technical walkthroughs, sprint demos, and cross-team alignment with product and leadership.',
+    'Balanced profile across frontend UX quality, backend reliability, and cloud-native delivery.'
+  ],
   skills: {
     languages: ['PHP (OOP)', 'JavaScript', 'TypeScript', 'Java', 'SQL', 'PL/SQL', 'C', 'C++'],
     frontend: ['React', 'Redux', 'HTML5', 'CSS', 'SCSS', 'AJAX', 'DOM', 'jQuery'],

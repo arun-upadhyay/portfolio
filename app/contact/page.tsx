@@ -5,6 +5,7 @@ import {useEffect, useRef} from 'react'
 import {useFormState, useFormStatus} from 'react-dom'
 import {HiPaperAirplane} from 'react-icons/hi'
 import {HiArrowLeft} from 'react-icons/hi'
+import { Reveal } from '@/components/Reveal'
 import {sendContactMessage} from './sendContactMessage'
 
 type FormState = { ok: boolean; message: string } | null
@@ -42,16 +43,16 @@ export default function ContactPage() {
     return (
         <main className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black text-white">
             <div className="container mx-auto px-6 py-16">
-                <div className="mb-10 flex items-center justify-between">
+                <Reveal className="mb-10 flex items-center justify-between">
                     <h1 className="text-3xl font-semibold">Contact</h1>
                     <Link href="/" className="inline-flex items-center gap-2 text-white/70 hover:text-white">
                         <HiArrowLeft className="h-4 w-4 text-white/60"/>
                         <span>Back to Home</span>
                     </Link>
+                </Reveal>
 
-                </div>
-
-                <div className="max-w-2xl rounded-2xl border border-white/15 bg-white/5 p-6">
+                <Reveal delay={90} className="max-w-2xl">
+                  <div className="rounded-2xl border border-white/15 bg-white/5 p-6">
                     <p className="text-white/70">Send a message and I will get back to you.</p>
 
                     {state?.message ? (
@@ -126,8 +127,9 @@ export default function ContactPage() {
 
                         <p className="pt-2 text-xs text-white/50">Spam protection is enabled.</p>
                     </form>
+                  </div>
+                </Reveal>
                 </div>
-            </div>
         </main>
     )
 }

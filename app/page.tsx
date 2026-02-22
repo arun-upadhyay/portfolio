@@ -2,11 +2,12 @@ import { Badge } from '@/components/Badge'
 import { Card } from '@/components/Card'
 import { Footer } from '@/components/Footer'
 import { Navbar } from '@/components/Navbar'
+import { Reveal } from '@/components/Reveal'
 import { Section } from '@/components/Section'
 import { site } from '@/lib/siteData'
 import Image from 'next/image'
 import { FaLinkedin, FaGithub } from 'react-icons/fa'
-import {HiChatAlt2, HiMail} from 'react-icons/hi'
+import { HiChatAlt2, HiMail } from 'react-icons/hi'
 
 function PillList({ items }: { items: string[] }) {
   return (
@@ -31,7 +32,7 @@ export default function Page() {
         <div className="container mx-auto relative pt-10 pb-16 md:pt-14 md:pb-20">
           <div className="grid items-start gap-10 md:grid-cols-[1fr_auto]">
             {/* Left: Text */}
-            <div className="max-w-3xl">
+            <Reveal className="max-w-3xl">
               <p className="text-sm text-white/70">{site.location}</p>
               <h1 className="mt-3 text-4xl font-semibold tracking-tight text-white md:text-5xl">
                 {site.name}
@@ -73,15 +74,16 @@ export default function Page() {
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
                 >
-                  <FaGithub className="h-5 w-5" />
-                  GitHub
-                </a>
+                    <FaGithub className="h-5 w-5" />
+                    GitHub
+                  </a>
+
               </div>
 
-            </div>
+            </Reveal>
 
             {/* Right: Photo */}
-            <div className="mx-auto mt-2 md:mx-0 md:mt-0">
+            <Reveal delay={120} className="mx-auto mt-2 md:mx-0 md:mt-0">
               <div className="relative h-44 w-44 overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-[0_0_40px_rgba(255,255,255,0.08)] md:h-56 md:w-56">
                 <Image
                     src="/profile.jpeg"
@@ -91,15 +93,43 @@ export default function Page() {
                     priority
                 />
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
 
       </div>
 
       <div className="container mx-auto">
+        <Section
+            id="impact"
+            title="Career Highlights"
+            subtitle="A quick view of experience, strengths, and real-world impact."
+        >
+          <div className="stagger-grid equal-cards grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {site.recruiterSnapshot.map((snapshot) => (
+              <Card key={snapshot.label} className="min-h-[14.5rem] sm:min-h-[17rem]">
+                <p className="text-xs uppercase tracking-[0.16em] text-white/50">{snapshot.label}</p>
+                <p className="mt-4 text-3xl font-semibold tracking-tight text-white">{snapshot.value}</p>
+                <p className="mt-4 text-base leading-relaxed text-white/70">{snapshot.detail}</p>
+              </Card>
+            ))}
+          </div>
+
+          <div className="stagger-grid equal-cards mt-6 grid gap-6 md:grid-cols-2">
+            {site.impactHighlights.map((highlight) => (
+              <Card key={highlight.title} className="min-h-[14rem] sm:min-h-[16rem]">
+                <h3 className="text-base font-semibold">{highlight.title}</h3>
+                <p className="mt-3 text-white/70 leading-relaxed">{highlight.detail}</p>
+                <div className="mt-auto pt-5">
+                  <PillList items={highlight.tags} />
+                </div>
+              </Card>
+            ))}
+          </div>
+        </Section>
+
         <Section id="about" title="About" subtitle="A quick snapshot of what I do.">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="stagger-grid equal-cards grid gap-6 md:grid-cols-2">
             <Card>
               <h3 className="text-base font-semibold">Summary</h3>
               <ul className="mt-4 space-y-3 text-white/75">
@@ -111,13 +141,11 @@ export default function Page() {
               </ul>
             </Card>
             <Card>
-              <h3 className="text-base font-semibold">Core strengths</h3>
+              <h3 className="text-base font-semibold">Why teams trust me</h3>
               <ul className="mt-4 space-y-2 text-white/75">
-                <li>Full SDLC delivery (Agile and Scrum)</li>
-                <li>Enterprise UI engineering (React and TypeScript)</li>
-                <li>Backend services (PHP, Node.js, Java) and REST APIs</li>
-                <li>Databases and performance (MySQL, PostgreSQL, Oracle)</li>
-                <li>Cloud and delivery (AWS, Docker, Kubernetes, Jenkins)</li>
+                {site.recruiterFocus.map((focus) => (
+                  <li key={focus}>{focus}</li>
+                ))}
               </ul>
             </Card>
           </div>
@@ -133,7 +161,7 @@ export default function Page() {
         ) : null}
 
         <Section id="skills" title="Skills" subtitle="Tools and technologies I use regularly.">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="stagger-grid equal-cards grid gap-6 md:grid-cols-2">
             <Card>
               <h3 className="text-base font-semibold">Languages</h3>
               <div className="mt-4">
@@ -162,7 +190,7 @@ export default function Page() {
         </Section>
 
         <Section id="experience" title="Experience" subtitle="Roles and impact.">
-          <div className="space-y-6">
+          <div className="stagger-list space-y-6">
             {site.experiences.map((e) => (
               <Card key={`${e.company}-${e.dates}`}>
                 <div className="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
@@ -194,7 +222,7 @@ export default function Page() {
         </Section>
 
         <Section id="projects" title="Projects" subtitle="Selected work and accomplishments.">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="stagger-grid equal-cards grid gap-6 md:grid-cols-2">
             {site.projects.map((p) => (
               <Card key={p.title}>
                 <h3 className="text-lg font-semibold">{p.title}</h3>
@@ -213,7 +241,7 @@ export default function Page() {
         </Section>
 
         <Section id="education" title="Education" subtitle="Academic background and certifications.">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="stagger-grid equal-cards grid gap-6 md:grid-cols-2">
             <Card>
               <h3 className="text-base font-semibold">Degrees</h3>
               <div className="mt-4 space-y-4">
