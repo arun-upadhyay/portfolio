@@ -21,7 +21,7 @@ function PillList({ items }: { items: string[] }) {
 
 export default function Page() {
   return (
-    <main id="top" className="min-h-screen bg-black">
+    <main id="top" className="page-surface min-h-screen">
       <Navbar />
 
       {/* Hero */}

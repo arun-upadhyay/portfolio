@@ -41,7 +41,7 @@ export default function ContactPage() {
     }, [state])
 
     return (
-        <main className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black text-white">
+        <main className="page-surface min-h-screen text-white">
             <div className="container mx-auto px-6 py-16">
                 <Reveal className="mb-10 flex items-center justify-between">
                     <h1 className="text-3xl font-semibold">Contact</h1>

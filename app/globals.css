@@ -4,6 +4,55 @@
 
 :root {
   color-scheme: dark;
+  --page-bg: #03050a;
+  --page-text: #f5f7fb;
+  --page-glow-a: rgba(14, 165, 233, 0.12);
+  --page-glow-b: rgba(245, 158, 11, 0.1);
+  --page-glow-c: rgba(255, 255, 255, 0.085);
+  --page-top-light: rgba(255, 255, 255, 0.045);
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-hover-border: rgba(255, 255, 255, 0.2);
+  --card-hover-shadow: 0 18px 45px rgba(14, 165, 233, 0.12);
+  --nav-bg: rgba(0, 0, 0, 0.62);
+  --nav-border: rgba(255, 255, 255, 0.1);
+  --toggle-bg: rgba(255, 255, 255, 0.06);
+  --toggle-border: rgba(255, 255, 255, 0.12);
+}
+
+html[data-theme='ocean'] {
+  --page-bg: #020814;
+  --page-glow-a: rgba(56, 189, 248, 0.2);
+  --page-glow-b: rgba(37, 99, 235, 0.14);
+  --page-glow-c: rgba(125, 211, 252, 0.07);
+  --page-top-light: rgba(125, 211, 252, 0.03);
+  --grid-line: rgba(125, 211, 252, 0.08);
+  --card-bg: rgba(10, 37, 64, 0.28);
+  --card-border: rgba(125, 211, 252, 0.18);
+  --card-hover-border: rgba(125, 211, 252, 0.35);
+  --card-hover-shadow: 0 18px 45px rgba(14, 165, 233, 0.2);
+  --nav-bg: rgba(2, 22, 42, 0.72);
+  --nav-border: rgba(125, 211, 252, 0.18);
+  --toggle-bg: rgba(56, 189, 248, 0.18);
+  --toggle-border: rgba(125, 211, 252, 0.34);
+}
+
+html[data-theme='ember'] {
+  --page-bg: #0b0504;
+  --page-glow-a: rgba(251, 146, 60, 0.18);
+  --page-glow-b: rgba(239, 68, 68, 0.14);
+  --page-glow-c: rgba(254, 243, 199, 0.06);
+  --page-top-light: rgba(254, 243, 199, 0.025);
+  --grid-line: rgba(251, 146, 60, 0.08);
+  --card-bg: rgba(46, 16, 13, 0.26);
+  --card-border: rgba(251, 146, 60, 0.2);
+  --card-hover-border: rgba(252, 165, 165, 0.34);
+  --card-hover-shadow: 0 18px 45px rgba(251, 113, 33, 0.22);
+  --nav-bg: rgba(31, 12, 9, 0.76);
+  --nav-border: rgba(251, 146, 60, 0.22);
+  --toggle-bg: rgba(249, 115, 22, 0.18);
+  --toggle-border: rgba(251, 146, 60, 0.34);
 }
 
 html {
@@ -11,14 +60,45 @@ html {
 }
 
 body {
-  @apply bg-black text-white antialiased;
+  @apply antialiased;
+  background: var(--page-bg);
+  color: var(--page-text);
+}
+
+.page-surface {
+  background:
+    linear-gradient(180deg, var(--page-top-light), transparent 28%),
+    radial-gradient(900px circle at 50% -8%, var(--page-glow-c), transparent 62%),
+    radial-gradient(1200px circle at 0% 0%, var(--page-glow-a), transparent 52%),
+    radial-gradient(900px circle at 100% 0%, var(--page-glow-b), transparent 48%),
+    var(--page-bg);
 }
 
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 36px 36px;
+}
+
+.nav-shell {
+  background: var(--nav-bg);
+  border-color: var(--nav-border);
+}
+
+.theme-toggle {
+  border: 1px solid var(--toggle-border);
+  background: var(--toggle-bg);
+}
+
+.card-shell {
+  border-color: var(--card-border);
+  background: var(--card-bg);
+}
+
+.card-shell:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: var(--card-hover-shadow);
 }
 
 .route-transition {

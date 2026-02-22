@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { HiMail } from 'react-icons/hi'
 import { FiAward, FiBookOpen, FiBriefcase, FiFolder, FiLayers, FiUser } from 'react-icons/fi'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 const links = [
   { href: '#impact', label: 'Highlights', icon: FiAward },
@@ -63,7 +64,7 @@ export function Navbar() {
   }, [])
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur">
+    <header className="nav-shell sticky top-0 z-50 border-b backdrop-blur">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         <a href="#top" className="font-semibold tracking-tight text-white">
           Arun Upadhyay
@@ -90,14 +91,17 @@ export function Navbar() {
           ))}
         </nav>
 
-        <button
-          className="rounded-md border border-white/10 px-3 py-2 text-sm text-white/90 hover:bg-white/5 md:hidden"
-          onClick={() => setOpen((value) => !value)}
-          aria-expanded={open}
-          aria-label="Toggle navigation"
-        >
-          Menu
-        </button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            className="rounded-md border border-white/10 px-3 py-2 text-sm text-white/90 hover:bg-white/5 md:hidden"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-label="Toggle navigation"
+          >
+            Menu
+          </button>
+        </div>
       </div>
 
       {open ? (
